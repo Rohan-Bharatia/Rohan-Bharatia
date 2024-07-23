@@ -88,7 +88,9 @@ body::-webkit-scrollbar {
 .container h1,
 .container h2,
 .container h3,
-.container p {
+.container p,
+.container ul,
+.container li {
   font-family: "Roboto Slab", serif;
   color: #cccccc;
 }
@@ -96,4 +98,41 @@ body::-webkit-scrollbar {
 .container span a {
   color: var(--accent-color);
   text-decoration: underline;
+}
+
+.container .repo {
+  background-color: #272a3053;
+  font-family: "Roboto Slab", serif;
+  color: #cccccc;
+  border-radius: 0.25rem;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px #0000001b;
+  display: flexbox;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1 1 40%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+}
+
+.container .repo h2,
+.container .repo h6 a {
+  color: var(--accent-color);
+}
+
+.container .repo h6 a {
+  text-decoration: underline;
+}
+
+.container .repo:hover::after {
+  scale: initial;
+}
+
+.container .repo:hover {
+  scale: calc(initial * 1.1);
 }
