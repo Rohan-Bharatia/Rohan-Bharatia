@@ -78,3 +78,22 @@ body::-webkit-scrollbar {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+.container {
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.container h1,
+.container h2,
+.container h3,
+.container p {
+  font-family: "Roboto Slab", serif;
+  color: #cccccc;
+}
+
+.container span a {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
