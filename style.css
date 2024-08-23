@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --accent-color: #76bbf9;
+}
+
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  background-color: #272a30;
+  font-family: "Roboto Slab", serif;
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.navbar {
+  background-color: #0d1117;
+  overflow: none;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  height: 75px;
+  font-family: "Roboto Slab", serif;
+}
+
+.navbar h2 {
+  transform: translate(0px, -10px);
+  float: left;
+  color: var(--accent-color);
+  text-align: center;
+  padding: 14px 16px;
+}
+
+.navbar a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 30px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  position: relative;
+}
+
+.navbar a::after {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #cccccc;
+  transition: top 0.5s ease;
+  z-index: -1;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.navbar a:hover::after {
+  top: 0;
+}
+
+.navbar a:hover {
+  color: #333333;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.navbar a:active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.container {
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.container h1,
+.container h2,
+.container h3,
+.container p,
+.container ul,
+.container li {
+  font-family: "Roboto Slab", serif;
+  color: #cccccc;
+}
+
+.container span a {
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+.container .repo {
+  background-color: #272a3053;
+  font-family: "Roboto Slab", serif;
+  color: #cccccc;
+  border-radius: 0.25rem;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px #0000001b;
+  display: flexbox;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex: 1 1 40%;
+  box-sizing: border-box;
+  padding: 20px;
+  text-align: center;
+}
+
+.container .repo h2,
+.container .repo h6 a {
+  color: var(--accent-color);
+}
+
+.container .repo h6 a {
+  text-decoration: underline;
+}
+
+.container .repo:hover::after {
+  scale: initial;
+}
+
+.container .repo:hover {
+  scale: calc(initial * 1.1);
+}
