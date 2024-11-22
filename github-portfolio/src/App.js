@@ -62,17 +62,19 @@ const ProjectCard = ({ title, description, language, stars, forks, url }) => {
     }
 
     return (
-        <div className='project-card'>
-            <h3>
-                <a href={url} target='_blank' rel='noopener noreferrer'>{title}</a>
-            </h3>
-            <p>{description}</p>
-            <div className='project-stats'>
-                {languageBadge(language)}
-                <span>{stars} ⭐</span>
-                <span>{forks} 🍴</span>
+        <a href={url} target='_blank' rel='noopener noreferrer'>
+            <div className='project-card'>
+                <h3>
+                    {title}
+                </h3>
+                <p>{description}</p>
+                <div className='project-stats'>
+                    {languageBadge(language)}
+                    <span>{stars} ⭐</span>
+                    <span>{forks} 🍴</span>
+                </div>
             </div>
-        </div>
+        </a>
     );
 }
 
@@ -95,7 +97,7 @@ const Projects = () => {
             </header>
             <h2>My Projects</h2>
             <button className='back-button' onClick={() => navigate('/')}>
-                Back to Home
+                <b>{"<"}</b> Back to Home
             </button>
             <div className='projects-list'>
                 {projects.length === 0 ? (
@@ -109,7 +111,7 @@ const Projects = () => {
                             language={project.language === 'Cpp' ? 'C++' : project.language}
                             stars={project.stargazers_count}
                             forks={project.forks_count}
-                            repoUrl={project.html_url}
+                            url={project.html_url}
                         />
                     ))
                 )}
