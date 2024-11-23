@@ -2,11 +2,30 @@
   --bg-color: #121212;
   --text-color: #f5f5f5;
   --text-color-sub1: #555555;
-  --text-color-sub1: #777777;  
+  --text-color-sub2: #777777;  
   --primary-color: #4a90e2;
   --primary-color-hover: #357abd;
   --shadow-color: #00000010;
   --transition-speed: 0.5s;
+}
+
+.loading {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--shadow-color);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 *,
@@ -98,6 +117,11 @@ body, html {
 .button:hover {
   background-color: var(--primary-color-hover);
   transform: scale(1.05);
+}
+
+.button:focus {
+  outline: 2px solid var(--primary-color-hover);
+  outline-offset: 2px;
 }
 
 .hero-image {
@@ -204,4 +228,44 @@ a {
 .back-button:hover {
   transform: scale(1.1);
   opacity: 0.9;
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-form label {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: max-content;
+  padding: 1rem;
+  border-color: var(--primary-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.submit-button {
+  padding: 0.75rem 1rem;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero-text h2 {
+    font-size: 2.5rem;
+  }
 }

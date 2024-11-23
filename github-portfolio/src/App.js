@@ -84,9 +84,20 @@ const Projects = () => {
 
     useEffect(() => {
         const fetchProjects = async () => {
-            const response    = await fetch('https://api.github.com/users/Rohan-Bharatia/repos');
-            const data        = await response.json();
-            setProjects(data);
+            try {
+                const response = await fetch('https://api.github.com/users/Rohan-Bharatia/repos');
+                if (!response.ok)
+                    throw new Error(`HTTP error! status: ${response.status}`);
+
+                const data = await response.json();
+                setProjects(data);
+
+            }
+            catch (error)
+            {
+                console.error("Error fetching GitHub projects:", error);
+                setProjects([]);
+            }
         };
         fetchProjects();
     }, []);
@@ -123,16 +134,127 @@ const Projects = () => {
 const Contact = () => {
     const navigate = useNavigate();
 
+    const [formData, setFormData] = useState({
+            name:    "",
+            email:   "",
+            message: "",
+        });
+    const [status, setStatus] = useState("");
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    }
+
+    const validateEmail = (email) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        const { name, email, message } = formData;
+
+        if (!name || !email || !message) {
+            setStatus("All fields are required");
+            return;
+        }
+
+        if (!validateEmail(email))
+        {
+            setStatus("Invalid email format");
+            return;
+        }
+
+        try {
+            const response = await fetch("https://rohan-bharatia.github.io/Rohan-Bharatia/", {
+                method:  "POST",
+                headers: { "Content-Type": "application/json" },
+                body:    JSON.stringify(formData),
+            });
+      
+            if (response.ok) {
+                setStatus("Message sent successfully!");
+                setFormData({
+                        name:    "",
+                        email:   "",
+                        message: "",
+                    });
+            }
+            else
+                setStatus("Failed to send message.");
+        }
+        catch (error)
+        {
+            setStatus("An error occurred. Please try again.");
+        }
+    }
+
     return (
         <div className="page">
             <header className='header'>
             </header>
             <h2>Contact Me</h2>
-            <p>Coming soon...</p>
-            <button className="back-button" onClick={() => navigate("/")}>
-                Back to Home
+            <button className='back-button' onClick={() => navigate('/')}>
+                <b>{"<"}</b> Back to Home
             </button>
+            <form className='contact-form' onSubmit={handleSubmit}>
+                <label>
+                    Name: 
+                    <br />
+                    <input
+                        type='text'
+                        name='name'
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <hr />
+                <label>
+                    Email: 
+                    <br />
+                    <input
+                        type='email'
+                        name='email'
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <hr />
+                <label>
+                    Message: 
+                    <br />
+                    <textarea
+                        name='message'
+                        value={formData.message}
+                        onChange={handleInputChange}
+                        required
+                        rows='5'
+                    />
+                </label>
+                <hr />
+                <button type="submit" className='submit-button'>
+                    Send
+                </button>
+                <hr />
+                {status && <p>{status}</p>}
+            </form>
         </div>
+    );
+}
+
+const NotFound = () => {
+    return (
+        <div className="page">
+        <h2>404: Page Not Found</h2>
+        <Link to="/" className="button">Go to Home</Link>
+    </div>
     );
 }
 
@@ -143,6 +265,7 @@ const App = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/projects' element={<Projects />} />
                 <Route path='/contact' element={<Contact />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
     );
